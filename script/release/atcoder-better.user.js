@@ -15,7 +15,7 @@
 // @connect      api.interpreter.caiyunai.com
 // @connect      translate.google.com
 // @connect      openai.api2d.net
-// @connect      api.openai.com
+// @connect      generativelanguage.googleapis.com
 // @connect      www.luogu.com.cn
 // @connect      vjudge.net
 // @connect      clist.by
@@ -6673,7 +6673,7 @@ const chatgptConfigEditHTML = `
                     </div>
                 </div>
             </label>
-            <input type='text' id='chatgpt_model' placeholder='gpt-3.5-turbo' require = false>
+            <input type='text' id='chatgpt_model' placeholder='gemini-2.0-flash' require = false>
         </div>
         <div class="OJBetter_setting_list">
             <label for='chatgpt_key'>
@@ -6697,7 +6697,7 @@ const chatgptConfigEditHTML = `
                     </div>
                 </div>
             </label>
-            <input type='text' id='chatgpt_proxy' placeholder='https://api.openai.com/v1/chat/completions' require = false>
+            <input type='text' id='chatgpt_proxy' placeholder='https://generativelanguage.googleapis.com/v1beta/openai/chat/completions' require = false>
         </div>
         <hr>
         <details>
@@ -13926,7 +13926,7 @@ async function translate_caiyun(raw) {
  * @returns {Promise<TransRawData>} 翻译结果对象
  */
 async function translate_openai(raw) {
-    const modelDefault = 'gpt-3.5-turbo';
+    const modelDefault = 'gemini-2.0-flash';
     const lang = getTargetLanguage('openai');
     let prompt = "";
     if (OJBetter.chatgpt.customPrompt) {
@@ -13974,7 +13974,7 @@ ${raw}
     };
     const options = {
         method: "POST",
-        url: OJBetter.chatgpt.config.proxy || 'https://api.openai.com/v1/chat/completions',
+        url: OJBetter.chatgpt.config.proxy || 'https://generativelanguage.googleapis.com/v1beta/openai/chat/completions',
         data: JSON.stringify(data),
         responseType: 'json',
         headers: {
@@ -14033,7 +14033,7 @@ async function translate_openai_stream(raw, translateDiv) {
  * @returns {AsyncGenerator<string>} 返回 AsyncGenerator
  */
 async function* openai_stream(raw) {
-    const modelDefault = 'gpt-3.5-turbo';
+    const modelDefault = 'gemini-2.0-flash';
     const lang = getTargetLanguage('openai');
     let prompt = "";
     if (OJBetter.chatgpt.customPrompt) {
@@ -14082,7 +14082,7 @@ ${raw}
     };
     const options = {
         method: "POST",
-        url: OJBetter.chatgpt.config.proxy || 'https://api.openai.com/v1/chat/completions',
+        url: OJBetter.chatgpt.config.proxy || 'https://generativelanguage.googleapis.com/v1beta/openai/chat/completions',
         data: JSON.stringify(data),
         responseType: 'stream',
         headers: {
