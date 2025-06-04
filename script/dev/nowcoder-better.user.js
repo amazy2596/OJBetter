@@ -9,7 +9,7 @@
 // @connect      m.youdao.com
 // @connect      translate.google.com
 // @connect      openai.api2d.net
-// @connect      api.openai.com
+// @connect      generativelanguage.googleapis.com
 // @connect      www.luogu.com.cn
 // @connect      greasyfork.org
 // @connect      *
@@ -1360,7 +1360,7 @@ const chatgptConfigEditHTML = `
                 </div>
             </div>
         </label>
-        <input type='text' id='openai_model' placeholder='gpt-3.5-turbo' require = false>
+        <input type='text' id='openai_model' placeholder='gemini-2.0-flash' require = false>
         <label for='openai_key'>
             <div style="display: flex;align-items: center;">
                 <span class="input_label">KEY:</span>
@@ -1388,7 +1388,7 @@ const chatgptConfigEditHTML = `
                 </div>
             </div>
         </label>
-        <input type='text' id='openai_proxy' placeholder='https://api.openai.com/v1/chat/completions' require = false>
+        <input type='text' id='openai_proxy' placeholder='https://generativelanguage.googleapis.com/v1beta/openai/chat/completions' require = false>
         <h5>高级</h5>
         <hr>
         <label for='_header'>
@@ -2344,7 +2344,7 @@ async function translateProblemStatement(text, element_node, button) {
 async function translate_openai(raw) {
     var openai_retext = "";
     var data = {
-        model:  (openai_model !== null && openai_model !== "") ? openai_model : 'gpt-3.5-turbo',
+        model:  (openai_model !== null && openai_model !== "") ? openai_model : 'gemini-2.0-flash',
         messages: [{
             role: "user",
             content: "请将下面的文本翻译为中文，这是一道编程竞赛题描述的一部分，注意术语的翻译，注意保持其中的latex公式不翻译，你只需要回复翻译后的内容即可，不要回复任何其他内容：\n\n" + raw 
@@ -2355,7 +2355,7 @@ async function translate_openai(raw) {
     return new Promise(function (resolve, reject) {
         GM_xmlhttpRequest({
             method: 'POST',
-            url: (openai_proxy !== null && openai_proxy !== "") ? openai_proxy : 'https://api.openai.com/v1/chat/completions',
+            url: (openai_proxy !== null && openai_proxy !== "") ? openai_proxy : 'https://generativelanguage.googleapis.com/v1beta/openai/chat/completions',
 
             data: JSON.stringify(data),
             headers: {
